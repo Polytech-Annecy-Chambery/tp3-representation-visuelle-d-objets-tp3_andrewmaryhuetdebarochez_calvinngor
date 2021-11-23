@@ -79,7 +79,7 @@ class Configuration:
         gl.glMatrixMode(gl.GL_MODELVIEW)
         gl.glLoadIdentity()
         gl.glTranslatef(0.0, 0.0, self.parameters['screenPosition'])
-
+        gl.glRotatef(-90, 1.0, 0.0, 0.0)
         # Getter
 
     def getParameter(self, parameterKey):
