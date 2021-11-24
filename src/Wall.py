@@ -66,12 +66,10 @@ class Wall:
 
     # Adds an object    
     def add(self, x):
-        # A compléter en remplaçant pass par votre code
         self.objects.append(x)
         return self
 
     # Draws the faces
     def draw(self):
-        # A compléter en remplaçant pass par votre code
         for section in self.objects:
             section.draw()

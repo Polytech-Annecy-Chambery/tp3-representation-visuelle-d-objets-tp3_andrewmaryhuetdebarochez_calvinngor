@@ -65,6 +65,7 @@ class Section:
             [self.parameters['width'], self.parameters['thickness'], self.parameters['height']],  # 6
             [self.parameters['width'], self.parameters['thickness'], 0],  # 7
         ]
+
         self.faces = [
             [0, 1, 2, 3],  # Front
             [1, 5, 6, 2],  # Top
@@ -94,8 +95,7 @@ class Section:
         if self.parameters['orientation'] != 0:
             gl.glRotate(self.parameters['orientation'], 0.0, 0.0, 1.0)
 
-        gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)  # on trace les faces : GL_FILL
-        gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
+        gl.glBegin(gl.GL_LINES)  # Tracé d’un quadrilatère
 
         for face in self.faces:
             for i, point in enumerate(face):

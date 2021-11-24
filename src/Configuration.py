@@ -140,13 +140,6 @@ class Configuration:
         for x in self.objects:
             x.draw()
 
-    def zoom(self, ratio):
-        """
-        Zoom camera by modifying screenPosition
-        :param ratio: float
-        """
-        gl.glScalef(ratio, ratio, ratio)
-
     # Processes the KEYDOWN event
     def processKeyDownEvent(self):
         # Rotates around the z-axis
@@ -161,26 +154,36 @@ class Configuration:
             pygame.time.wait(300)
 
         elif self.event.key == pygame.K_PAGEDOWN:
-            self.zoom(1 / 1.1)
+            gl.glScalef(1 / 1.1, 1 / 1.1, 1 / 1.1)
         elif self.event.key == pygame.K_PAGEUP:
-            self.zoom(1.1)
+            gl.glScalef(1.1, 1.1, 1.1)
 
     # Processes the MOUSEBUTTONDOWN event
     def processMouseButtonDownEvent(self):
         # Use mouse wheel to zoom out / in
         if self.event.button == pygame.BUTTON_WHEELDOWN:
-            self.zoom(1 / 1.1)
+            gl.glScalef(1 / 1.1, 1 / 1.1, 1 / 1.1)
         elif self.event.button == pygame.BUTTON_WHEELUP:
-            self.zoom(1.1)
+            gl.glScalef(1.1, 1.1, 1.1)
 
     # Processes the MOUSEMOTION event
     def processMouseMotionEvent(self):
+        # Clic gauche de la souris pressé
         if pygame.mouse.get_pressed(3)[0]:
-            gl.glRotate(self.event.rel[0], 0.0, 0.0, 1.1)
-            gl.glRotate(self.event.rel[1], 1.0, 0.0, 0.0)
+            # Rotation sur l'axe Z en fonction de la distance
+            # parcourue par la souris sur l'axe X
+            gl.glRotatef(self.event.rel[0], 0.0, 0.0, 1.1)
+            # Rotation sur l'axe X en fonction de la distance
+            # parcourue par la souris sur l'axe Y
+            gl.glRotatef(self.event.rel[1], 1.0, 0.0, 0.0)
+        # Clic droit de la souris pressé
         elif pygame.mouse.get_pressed(3)[2]:
-            gl.glTranslatef(self.event.rel[0]*0.1, 0.0, 0.0)
-            gl.glTranslatef(0.0, 0.0, -self.event.rel[1]*0.1)
+            # Translation sur l'axe X en fonction de la distance
+            # parcourue par la souris sur l'axe X
+            gl.glTranslatef(self.event.rel[0] * 0.1, 0.0, 0.0)
+            # Translation sur l'axe Z en fonction de la distance
+            # parcourue par la souris sur l'axe Y
+            gl.glTranslatef(0.0, 0.0, -self.event.rel[1] * 0.1)
 
     # Displays on screen and processes events    
     def display(self):
