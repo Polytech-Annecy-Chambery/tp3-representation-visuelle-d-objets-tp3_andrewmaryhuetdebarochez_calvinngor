@@ -86,24 +86,33 @@ class Section:
         # A compléter en remplaçant pass par votre code
         pass
 
-        # Draws the edges
-
+    # Draws the edges
     def drawEdges(self):
         # A compléter en remplaçant pass par votre code
-        pass
-
-        # Draws the faces
-
-    def draw(self):
         gl.glPushMatrix()
-
-        color_shading_ratio = 0.1
 
         for face in self.faces:
             gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)  # on trace les faces : GL_FILL
             gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
             for i, point in enumerate(face):
-                gl.glColor3fv([0.5*i*color_shading_ratio, 0.5*i*color_shading_ratio, 0.5*i*color_shading_ratio])
+                gl.glColor3fv([0.0, 0.0, 0.0])
+                gl.glVertex3fv(self.vertices[point])
+            gl.glEnd()
+
+        gl.glPopMatrix()
+
+    # Draws the faces
+    def draw(self):
+        if self.parameters['edges']:
+            self.drawEdges()
+
+        gl.glPushMatrix()
+
+        for face in self.faces:
+            gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL)  # on trace les faces : GL_FILL
+            gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
+            for i, point in enumerate(face):
+                gl.glColor3fv([10/(i+1*15), 0.0, 1*i*5])
                 gl.glVertex3fv(self.vertices[point])
             gl.glEnd()
 
