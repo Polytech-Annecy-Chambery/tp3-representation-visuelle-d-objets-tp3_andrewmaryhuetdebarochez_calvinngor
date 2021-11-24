@@ -141,6 +141,13 @@ class Configuration:
         for x in self.objects:
             x.draw()
 
+    def zoom(self, ratio):
+        """
+        Zoom camera by modifying screenPosition
+        :param ratio: float
+        """
+        self.setParameter("screenPosition", self.getParameter("screenPosition") * ratio)
+
     # Processes the KEYDOWN event
     def processKeyDownEvent(self):
         # Rotates around the z-axis
@@ -154,13 +161,17 @@ class Configuration:
             self.parameters['axes'] = not self.parameters['axes']
             pygame.time.wait(300)
         elif self.event.key == pygame.K_PAGEDOWN:
-            self.setParameter("screenPosition", self.getParameter("screenPosition") * 1 / 1.1)
+            self.zoom(1/1.1)
         elif self.event.key == pygame.K_PAGEUP:
-            self.setParameter("screenPosition", self.getParameter("screenPosition") * 1.1)
+            self.zoom(1.1)
 
     # Processes the MOUSEBUTTONDOWN event
     def processMouseButtonDownEvent(self):
-        pass
+        # Use mouse wheel to zoom out / in
+        if self.event.button == pygame.BUTTON_WHEELDOWN:
+            self.zoom(1 / 1.1)
+        if self.event.button == pygame.BUTTON_WHEELUP:
+            self.zoom(1.1)
 
     # Processes the MOUSEMOTION event
     def processMouseMotionEvent(self):
