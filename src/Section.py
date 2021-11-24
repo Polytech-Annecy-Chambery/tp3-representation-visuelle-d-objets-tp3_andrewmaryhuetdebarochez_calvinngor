@@ -91,15 +91,21 @@ class Section:
         # A compléter en remplaçant pass par votre code
         gl.glPushMatrix()
 
+        if self.parameters['orientation'] != 0:
+            gl.glRotate(self.parameters['orientation'], 0.0, 0.0, 1.0)
+
+        gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)  # on trace les faces : GL_FILL
+        gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
+
         for face in self.faces:
-            gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)  # on trace les faces : GL_FILL
-            gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
             for i, point in enumerate(face):
                 gl.glColor3fv([0.0, 0.0, 0.0])
                 gl.glVertex3fv(self.vertices[point])
-            gl.glEnd()
+
+        gl.glEnd()
 
         gl.glPopMatrix()
+
 
     # Draws the faces
     def draw(self):
@@ -108,13 +114,18 @@ class Section:
 
         gl.glPushMatrix()
 
+        if self.parameters['orientation'] != 0:
+            gl.glRotate(self.parameters['orientation'], 0.0, 0.0, 1.0)
+
+        gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL)  # on trace les faces : GL_FILL
+        gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
+
         for face in self.faces:
-            gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL)  # on trace les faces : GL_FILL
-            gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
             for i, point in enumerate(face):
                 gl.glColor3fv([10/(i+1*15), 0.0, 1*i*5])
                 gl.glVertex3fv(self.vertices[point])
-            gl.glEnd()
+
+        gl.glEnd()
+
 
         gl.glPopMatrix()
-

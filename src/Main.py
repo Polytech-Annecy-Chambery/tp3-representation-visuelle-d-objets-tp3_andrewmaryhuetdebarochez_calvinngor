@@ -42,7 +42,10 @@ def Q2c():
 
 
 def Q3a():
-    pass
+    return Configuration().add(
+        Wall({'width': 100, 'height': 2, 'orientation': 90})).add(
+        Section({'position': [1, 1, 0], 'width': 7, 'height': 2.6, 'edges': True, 'orientation': 90})
+    )
 
 
 def Q4a():
@@ -117,8 +120,8 @@ def main():
     # configuration = Q1a()
     # configuration = Q1b_f()
     # configuration = Q2b()
-    configuration = Q2c()
-    # configuration = Q3a()
+    # configuration = Q2c()
+    configuration = Q3a()
     # configuration = Q4a()
     # configuration = Q5a()
     # configuration = Q5b()
