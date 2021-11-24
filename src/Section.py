@@ -71,7 +71,7 @@ class Section:
             [5, 6, 7, 4],  # Back
             [4, 7, 3, 0],  # Bottom
             [0, 1, 5, 4],  # Left
-            [2, 6, 7, 3]   # Right
+            [2, 6, 7, 3]  # Right
         ]
 
         # Checks if the opening can be created for the object x
@@ -106,7 +106,6 @@ class Section:
 
         gl.glPopMatrix()
 
-
     # Draws the faces
     def draw(self):
         if self.parameters['edges']:
@@ -122,10 +121,9 @@ class Section:
 
         for face in self.faces:
             for i, point in enumerate(face):
-                gl.glColor3fv([10/(i+1*15), 0.0, 1*i*5])
+                gl.glColor3fv([10 / (i + 1 * 15), 0.0, 1 * i * 5])
                 gl.glVertex3fv(self.vertices[point])
 
         gl.glEnd()
-
 
         gl.glPopMatrix()
