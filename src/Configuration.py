@@ -50,8 +50,7 @@ class Configuration:
         # Generates coordinates
         self.generateCoordinates()
 
-        # Initializes Pygame
-
+    # Initializes Pygame
     def initializePyGame(self):
         pygame.init()
         # Sets the screen size.
@@ -160,6 +159,7 @@ class Configuration:
         elif self.event.dict['unicode'] == 'a' or self.event.key == pygame.K_a:
             self.parameters['axes'] = not self.parameters['axes']
             pygame.time.wait(300)
+
         elif self.event.key == pygame.K_PAGEDOWN:
             self.zoom(1/1.1)
         elif self.event.key == pygame.K_PAGEUP:
@@ -170,12 +170,15 @@ class Configuration:
         # Use mouse wheel to zoom out / in
         if self.event.button == pygame.BUTTON_WHEELDOWN:
             self.zoom(1 / 1.1)
-        if self.event.button == pygame.BUTTON_WHEELUP:
+        elif self.event.button == pygame.BUTTON_WHEELUP:
             self.zoom(1.1)
 
     # Processes the MOUSEMOTION event
     def processMouseMotionEvent(self):
-        pass
+        if pygame.mouse.get_pressed(3)[0]:
+            print(self.event.rel[0])
+        elif pygame.mouse.get_pressed(3)[2]:
+            print(self.event.rel[1])
 
     # Displays on screen and processes events    
     def display(self):
