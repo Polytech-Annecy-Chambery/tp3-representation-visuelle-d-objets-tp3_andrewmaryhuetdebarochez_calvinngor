@@ -143,7 +143,7 @@ class Configuration:
 
     # Processes the KEYDOWN event
     def processKeyDownEvent(self):
-        # Rotates around the z-axis                       
+        # Rotates around the z-axis
         if self.event.dict['unicode'] == 'Z' or (self.event.mod & pygame.KMOD_SHIFT and self.event.key == pygame.K_z):
             gl.glRotate(-2.5, 0, 0, 1)
         elif self.event.dict['unicode'] == 'z' or self.event.key == pygame.K_z:
@@ -153,6 +153,10 @@ class Configuration:
         elif self.event.dict['unicode'] == 'a' or self.event.key == pygame.K_a:
             self.parameters['axes'] = not self.parameters['axes']
             pygame.time.wait(300)
+        elif self.event.key == pygame.K_PAGEDOWN:
+            self.setParameter("screenPosition", self.getParameter("screenPosition") * 1 / 1.1)
+        elif self.event.key == pygame.K_PAGEUP:
+            self.setParameter("screenPosition", self.getParameter("screenPosition") * 1.1)
 
     # Processes the MOUSEBUTTONDOWN event
     def processMouseButtonDownEvent(self):
