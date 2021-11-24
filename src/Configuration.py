@@ -142,7 +142,6 @@ class Configuration:
 
     def zoom(self, ratio):
         """
-        gl.glscalef(
         Zoom camera by modifying screenPosition
         :param ratio: float
         """
@@ -162,7 +161,7 @@ class Configuration:
             pygame.time.wait(300)
 
         elif self.event.key == pygame.K_PAGEDOWN:
-            self.zoom(1/1.1)
+            self.zoom(1 / 1.1)
         elif self.event.key == pygame.K_PAGEUP:
             self.zoom(1.1)
 
@@ -177,9 +176,11 @@ class Configuration:
     # Processes the MOUSEMOTION event
     def processMouseMotionEvent(self):
         if pygame.mouse.get_pressed(3)[0]:
-            print(self.event.rel[0])
+            gl.glRotate(self.event.rel[0], 0.0, 0.0, 1.1)
+            gl.glRotate(self.event.rel[1], 1.0, 0.0, 0.0)
         elif pygame.mouse.get_pressed(3)[2]:
-            print(self.event.rel[1])
+            gl.glTranslatef(self.event.rel[0]*0.1, 0.0, 0.0)
+            gl.glTranslatef(0.0, 0.0, -self.event.rel[1]*0.1)
 
     # Displays on screen and processes events    
     def display(self):

@@ -56,10 +56,22 @@ class Section:
 
     def generate(self):
         self.vertices = [
-            # Définir ici les sommets
+            [0, 0, 0],  # 0
+            [0, 0, self.parameters['height']],  # 1
+            [self.parameters['width'], 0, self.parameters['height']],  # 2
+            [self.parameters['width'], 0, 0],  # 3
+            [0, self.parameters['thickness'], 0],  # 4
+            [0, self.parameters['thickness'], self.parameters['height']],  # 5
+            [self.parameters['width'], self.parameters['thickness'], self.parameters['height']],  # 6
+            [self.parameters['width'], self.parameters['thickness'], 0],  # 7
         ]
         self.faces = [
-            # définir ici les faces
+            [0, 1, 2, 3],  # Front
+            [1, 5, 6, 2],  # Top
+            [5, 6, 7, 4],  # Back
+            [4, 7, 3, 0],  # Bottom
+            [0, 1, 5, 4],  # Left
+            [2, 6, 7, 3]   # Right
         ]
 
         # Checks if the opening can be created for the object x
@@ -83,5 +95,17 @@ class Section:
         # Draws the faces
 
     def draw(self):
-        # A compléter en remplaçant pass par votre code
-        pass
+        gl.glPushMatrix()
+
+        color_shading_ratio = 0.1
+
+        for face in self.faces:
+            gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)  # on trace les faces : GL_FILL
+            gl.glBegin(gl.GL_QUADS)  # Tracé d’un quadrilatère
+            for i, point in enumerate(face):
+                gl.glColor3fv([0.5*i*color_shading_ratio, 0.5*i*color_shading_ratio, 0.5*i*color_shading_ratio])
+                gl.glVertex3fv(self.vertices[point])
+            gl.glEnd()
+
+        gl.glPopMatrix()
+
