@@ -142,10 +142,11 @@ class Configuration:
 
     def zoom(self, ratio):
         """
+        gl.glscalef(
         Zoom camera by modifying screenPosition
         :param ratio: float
         """
-        self.setParameter("screenPosition", self.getParameter("screenPosition") * ratio)
+        gl.glScalef(ratio, ratio, ratio)
 
     # Processes the KEYDOWN event
     def processKeyDownEvent(self):
