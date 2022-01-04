@@ -133,18 +133,39 @@ def Q6():
     house = House({'position': [-3, 1, 0], 'orientation': 0})
     house.add(wall1).add(wall3).add(wall4).add(wall2)
 
-    house2 = House({'position': [-5, 1, 0], 'orientation': 0})
-    house2.add(wall1).add(wall3).add(wall4).add(wall2)
-
     door1 = Door({'position': [2, 0, 0]})
 
     window1 = Window({'position': [4, 0, 2]})
+    window2 = Window({'position': [8, 0, 1]})
+    window3 = Window({'position': [12, 0, 3]})
 
     wall1.add(door1)
     wall1.add(window1)
+    wall1.add(window2)
+    wall1.add(window3)
 
     configuration.add(house)
-    configuration.add(house2)
+
+    wall5 = Wall({'width': 30, 'height': 5, 'orientation': 0, 'position': [40, 0, 0]})
+    wall6 = Wall({'width': 10, 'height': 5, 'orientation': 90, 'position': [70, 0, 0]})
+    wall7 = Wall({'width': 30, 'height': 5, 'orientation': 180, 'position': [70, 10, 0]})
+    wall8 = Wall({'width': 10, 'height': 5, 'orientation': 270, 'position': [40, 10, 0]})
+
+    house = House({'position': [37, 1, 0], 'orientation': 0})
+    house.add(wall5).add(wall6).add(wall7).add(wall8)
+
+    door2 = Door({'position': [42, 0, 0]})
+
+    window4 = Window({'position': [44, 0, 2]})
+    window5 = Window({'position': [48, 0, 1]})
+    window6 = Window({'position': [52, 0, 3]})
+
+    wall5.add(door2)
+    wall5.add(window4)
+    wall5.add(window5)
+    wall5.add(window6)
+
+    configuration.add(house)
 
     return configuration
 

@@ -183,9 +183,9 @@ class Section:
 
         for face in self.faces:
             for i, point in enumerate(face):
-                gl.glColor3fv([self.parameters['color'][0] / (i + 1 * 15),
+                gl.glColor3fv([self.parameters['color'][0],
                                self.parameters['color'][1],
-                               self.parameters['color'][2] * i * 5])
+                               self.parameters['color'][2]])
                 gl.glVertex3fv(self.vertices[point])
 
         gl.glEnd()
