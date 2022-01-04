@@ -140,7 +140,7 @@ class Door:
         gl.glTranslatef(self.parameters['position'][0], self.parameters['position'][1], 0)
 
         # Rotation for the door if it is opened
-        if self.getParameter('openDoor') == True:
+        if self.getParameter('openDoor'):
             gl.glRotate(-90, 0, 0, 1)
 
             # Processes the Pygrame USER event

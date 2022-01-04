@@ -43,7 +43,8 @@ class Wall:
                                       'height': self.parameters['height'],
                                       'thickness': self.parameters['thickness'],
                                       'color': self.parameters['color'],
-                                      'position': self.parameters['position']})
+                                      'position': self.parameters['position'],
+                                      'orientation': self.parameters['orientation']})
         self.objects.append(self.parentSection)
 
         # Getter
@@ -66,6 +67,14 @@ class Wall:
 
     # Adds an object    
     def add(self, x):
+        section = self.findSection(x)
+        if section is None:
+            raise Exception("Ajout impossible de l'ouverture")
+
+        sections = section[1].createNewSections(x)
+
+        self.objects.pop(section[0])
+        self.objects.extend(sections)
         self.objects.append(x)
         return self
 
